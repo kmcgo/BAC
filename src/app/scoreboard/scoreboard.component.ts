@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DrinkService } from '../drinks.Service';
-import { Drink } from "./state/drink.model";
-import { Store } from '@ngrx/store';
-import { DrinkAppState } from './state/drink.state';
-import { selectDrinksFor } from './state/selector';
-import { Observable } from 'rxjs';
-import { Person } from './state/person.model';
 
 
 @Component({
