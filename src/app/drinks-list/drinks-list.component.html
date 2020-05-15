@@ -1,0 +1,36 @@
+<h2>What are you drinking?</h2>
+
+<div *ngFor="let bev of (drinks$ | async);">
+    <h3>
+      <a [title]="bev.name">
+        {{ bev.name }}
+      </a>
+    </h3>
+    <p *ngIf="bev.type">
+      Type: {{ bev.type }}
+    </p>
+    <p *ngIf="bev.percent">
+      Alcohol Content: {{ bev.percent }}%
+    </p>
+    <button (click)="addDrink(bev)">Pour one</button>
+</div>
+<div style="margin-top: 3em; margin-bottom: 5em" >
+  <strong>Don't have what you're looking for?</strong>
+  <form [formGroup]="drinkForm" (ngSubmit)="newDrink(drinkForm.value)">
+
+    <div>
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name">
+      
+      <label for="type">Type</label>
+      <input id="type" type="text" formControlName="type">
+
+      <label for="percent">Percent</label>
+      <input id="percent" type="number" formControlName="percent">
+    </div>
+  
+    <button class="button" type="submit">Pour my own</button>
+
+</form>
+</div>
+

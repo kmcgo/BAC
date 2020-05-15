@@ -1,0 +1,20 @@
+[
+    {
+        "type": "Liqor",
+        "name": "Captain Morgan",
+        "percent": 30,
+        "drank": 0
+    },
+    {
+        "type": "Beer",
+        "name": "Hamm's",
+        "percent": 4,
+        "drank": 0
+    },
+    {
+        "type": "Liqor",
+        "name": "Kirkland Vodka",
+        "percent": 40,
+        "drank": 0
+    }
+]

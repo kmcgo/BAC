@@ -1,0 +1,12 @@
+<h2>How you feeling {{person.name}}</h2>
+<h3>So far you've had {{ drinkCount }} drink(s) over {{hour}} Hour(s) {{minutes}} Minute(s) {{seconds}} Seconds</h3>
+<h2>That puts your BAC somewehere around {{BAC|number:'.3'}}</h2>
+<p style="font-size: 10px; margin-top:-10px">(I'm Not a Doctor though)</p> <br>
+<p><strong>Take a quick recap</strong></p>
+<div *ngFor="let bev of drinksDrank;">
+    <p> <strong>
+      <a [title]="bev.name">
+      {{ bev.name }}
+      </a>
+    </strong></p>
+</div>
