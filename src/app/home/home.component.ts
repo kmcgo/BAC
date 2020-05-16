@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Dummy } from '../bar';
+import {  FormGroup, FormControl, Validators } from '@angular/forms';
 import { DrinkService } from '../drinks.Service';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
 import { Person } from './person.model'
 
 @Component({
@@ -15,7 +12,7 @@ import { Person } from './person.model'
 export class HomeComponent implements OnInit {
 
   public genders = ['Male', 'Female'];
-  public model = new Dummy( "Joe", this.genders[0], 160);
+  public model: Person = {name: "Joe", weight: 160, gender: 'male'}; //model used for form control
   
   public person: Person;
   public time: number=0;
@@ -31,7 +28,6 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder,
     private drinkService: DrinkService,
 
   ) { 
@@ -43,7 +39,7 @@ export class HomeComponent implements OnInit {
   onSubmit(){
     if(!this.submitted){
       if(this.time<1){
-        this.startTimer();
+        this.startTimer(); //start the timer
       }
       this.submitted=true;
       this.drinkService.setPerson(this.name.value, this.weight.value, this.gender.value);
@@ -51,7 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   interval;
-  startTimer() {
+  startTimer() { //interval for keeping time
     this.interval = setInterval(() => {
         this.drinkService.updateTime();
         this.time = this.drinkService.getTime();

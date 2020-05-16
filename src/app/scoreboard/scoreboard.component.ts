@@ -34,7 +34,9 @@ export class ScoreboardComponent implements OnInit {
   }
 
   interval;
-  getTime() {
+  //TODO: make the timer an effect
+
+  getTime() { //interval for updating the stopwatch 
     this.interval = setInterval(() => {
       this.time = this.drinkService.getTime();
       this.seconds = this.time%60;
@@ -49,9 +51,9 @@ export class ScoreboardComponent implements OnInit {
     this.calculateBAC();
   }
 
-  calculateBAC():number {
+  calculateBAC():number { //function for doing the calucation
     var timeCalc:number
-    this.drinksDrank.forEach(drink =>{
+    this.drinksDrank.forEach(drink =>{ //for each drink had, count the amount of alcohol consumed
         var volume=0
         if(drink.percent<10){
             volume = 12;
@@ -63,19 +65,16 @@ export class ScoreboardComponent implements OnInit {
         this.alcGrams += (drink.percent/100) * volume;
     })
 
-    if(this.person.gender === 'Male'){
+    if(this.person.gender === 'Male'){ //set the gender constant
         this.constant = .68;
     }else if(this.person.gender === 'Female'){
         this.constant = .55;
     }
 
-    if(this.hour<1){ 
-        timeCalc= this.minutes/60;
-    }else{
-        timeCalc= (60*this.hour + this.minutes)/60;
-    }
+      timeCalc= (60*this.hour + this.minutes)/60; //get time as a fraction of an hour
 
-    this.BAC = ((this.alcGrams* 5.14)/(this.person.weight * this.constant)) - (timeCalc *.015);
+
+    this.BAC = ((this.alcGrams* 5.14)/(this.person.weight * this.constant)) - (timeCalc *.015); //fill formula
     
     return this.BAC;
   }

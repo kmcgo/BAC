@@ -33,10 +33,10 @@ export class DrinksComponent implements OnInit {
       percent: new FormControl(0, [Validators.required])
     });
 
-    this.drinks$.pipe(filter(x=>x.length===0)).subscribe(()=>{
-      this.drinkService.getDrinkMenu().subscribe(drink => {
+    this.drinks$.pipe(filter(x=>x.length===0)).subscribe(()=>{ //if the observable is empty
+      this.drinkService.getDrinkMenu().subscribe(drink => { //read in values from json 
           drink.forEach(drink => {
-            this.store.dispatch( new AddDrink(drink));
+            this.store.dispatch( new AddDrink(drink)); //place them into the state
           });
           this.drinks$.subscribe(x=>console.log(x));
       });
@@ -44,16 +44,17 @@ export class DrinksComponent implements OnInit {
       
   }
 
+  //TODO: use an action here
   addDrink(drink:Drink):void{
-    this.drinkService.addDrink(drink);
-    if(this.drinkService.getCount() > 6){
+    this.drinkService.addDrink(drink); //add the drink to drinks consumed
+    if(this.drinkService.getCount() > 6){ //give a message
       window.alert("This is drink number: " + this.drinkService.getCount() + "\nMight want to cool down there super chief");
     }else{
       window.alert("Enjoy that " + drink.name +"\nThis is drink number: " + this.drinkService.getCount());
     }
   }
 
-  newDrink(drink:Drink):void{
+  newDrink(drink:Drink):void{ //add the drink to the state for listing
     this.store.dispatch(new AddDrink({name: drink.name,  percent: drink.percent, type: drink.type}) )
     this.drinkService.addDrink(drink);
     window.alert("Enjoy that "+ drink.name+"\nThis is drink number: " + this.drinkService.drinkCount);
